@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add / Edit Exercise | Workout Routine Manager</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="brand">
+                FitTrack PHP
+                <span>Exercise &amp; Workout Routine Manager</span>
+            </a>
+            <nav class="main-nav">
+                <!-- PHP TODO: Dynamically show count from $_SESSION['routine'], and toggle "+ Add Exercise" / "Logout" based on $_SESSION['username'] -->
+                <a href="index.html">Exercise Catalog</a>
+                <a href="routine_builder.html">Active Routine (3)</a>
+                <a href="saved_routine.html">Saved Routines</a>
+                <a href="exercise_form.html" class="active">+ Add Exercise</a>
+                <a href="login.html">Login / Register</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="max-width: 760px;">
+        <div class="dev-banner">
+            <strong>Starter Add / Edit Form:</strong> Pre-populated below with <em>Barbell Bench Press</em>
+            (<code>exercise_id = 1</code>) to demonstrate Edit mode. In PHP, toggle between Add and Edit modes
+            depending on whether an <code>exercise_id</code> is passed, and protect this route with
+            <code>$_SESSION['username']</code>.
+        </div>
+
+        <div class="page-header">
+            <!-- PHP TODO: Switch heading dynamically between "Add New Exercise" and "Edit Exercise" -->
+            <h1>Add / Edit Exercise</h1>
+            <a href="index.html" class="btn btn-secondary">&larr; Back to Catalog</a>
+        </div>
+
+        <section class="card">
+            <!-- Note: enctype="multipart/form-data" is required for the 4-person team's optional image upload -->
+            <form action="index.php" method="post" enctype="multipart/form-data">
+                <!-- PHP TODO: Set action to "add_exercise" or "update_exercise" -->
+                <input type="hidden" name="action" value="update_exercise">
+                <input type="hidden" name="exercise_id" value="1">
+                <!-- Advisory client-side limit (2 MB = 2,097,152 bytes); always enforce server-side in PHP -->
+                <input type="hidden" name="MAX_FILE_SIZE" value="2097152">
+
+                <div class="form-group">
+                    <label for="exercise_name">Exercise Name</label>
+                    <input type="text" id="exercise_name" name="exercise_name" class="form-control"
+                           value="Barbell Bench Press" maxlength="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="muscle_group_id">Primary Muscle Group</label>
+                    <!-- PHP TODO: Populate <option> tags dynamically from the muscle_groups table -->
+                    <select id="muscle_group_id" name="muscle_group_id" class="form-control" required>
+                        <option value="">-- Select a Muscle Group --</option>
+                        <option value="1" selected>Chest</option>
+                        <option value="2">Back</option>
+                        <option value="3">Legs</option>
+                        <option value="4">Shoulders</option>
+                        <option value="5">Arms</option>
+                        <option value="6">Core</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="equipment">Equipment</label>
+                    <input type="text" id="equipment" name="equipment" class="form-control"
+                           value="Barbell" placeholder="e.g., Barbell, Dumbbell, Cable, Bodyweight" maxlength="60" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Difficulty Level</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="difficulty" value="Beginner"> Beginner
+                        </label>
+                        <label>
+                            <input type="radio" name="difficulty" value="Intermediate" checked> Intermediate
+                        </label>
+                        <label>
+                            <input type="radio" name="difficulty" value="Advanced"> Advanced
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="instructions">Form &amp; Execution Instructions</label>
+                    <textarea id="instructions" name="instructions" rows="4" class="form-control" required>Lie flat on a bench with feet planted firmly on the floor. Grip the barbell slightly wider than shoulder-width, lower it under control to mid-chest, and press upward until arms are extended.</textarea>
+                </div>
+
+                <!-- PHP TODO (4-Person Team - Section 4.6):
+                     1. Check $_FILES['exercise_image']['error'] (UPLOAD_ERR_NO_FILE is OK; catch UPLOAD_ERR_INI_SIZE / UPLOAD_ERR_FORM_SIZE).
+                     2. Enforce $_FILES['exercise_image']['size'] <= 2097152 (2 MB).
+                     3. Validate real image type via exif_imagetype() / getimagesize() (IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_GIF).
+                     4. Rename file deterministically to exercise_{id}.{ext} (e.g., exercise_1.jpg) using the validated extension.
+                     5. Save original to /images/originals/exercise_{id}.{ext}, generate 150px thumbnail in /images/thumbnails/exercise_{id}.{ext},
+                        and store "exercise_{id}.{ext}" in exercises.image_filename. -->
+                <div class="form-group" style="background: #f8fafc; padding: 0.9rem; border-radius: 6px; border: 1px dashed var(--border);">
+                    <label for="exercise_image">Exercise Photo (Optional — Required for 4-Person Team)</label>
+                    <input type="file" id="exercise_image" name="exercise_image" accept="image/jpeg,image/png,image/gif">
+                    <span class="help-text">
+                        Accepted formats: JPEG, PNG, GIF &bull; Max file size: <strong>2 MB (2,097,152 bytes)</strong>.<br>
+                        Server validates image type, renames the file to <code>exercise_{id}.{ext}</code>
+                        (e.g., <code>exercise_1.jpg</code>), saves the original to <code>/images/originals/</code>,
+                        and generates a 150px thumbnail in <code>/images/thumbnails/</code>.
+                    </span>
+                </div>
+
+                <div style="display: flex; gap: 0.65rem; margin-top: 1.25rem;">
+                    <button type="submit" class="btn btn-primary">Save Exercise</button>
+                    <a href="index.html" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        PHP &amp; MySQL Capstone Project &bull; Starter Front-End Template
+    </footer>
+</body>
+</html>

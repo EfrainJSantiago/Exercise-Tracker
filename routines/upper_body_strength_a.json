@@ -1,0 +1,46 @@
+{
+    "routine_title": "Upper Body Strength A",
+    "created_at": "2026-11-15 14:30:00",
+    "exercises": [
+        {
+            "exercise_id": 1,
+            "exercise_name": "Barbell Bench Press",
+            "muscle_group": "Chest",
+            "equipment": "Barbell",
+            "sets": 4,
+            "reps": 8,
+            "weight": 185,
+            "image_filename": null
+        },
+        {
+            "exercise_id": 5,
+            "exercise_name": "Pull-Ups",
+            "muscle_group": "Back",
+            "equipment": "Bodyweight",
+            "sets": 3,
+            "reps": 10,
+            "weight": 0,
+            "image_filename": null
+        },
+        {
+            "exercise_id": 10,
+            "exercise_name": "Overhead Barbell Press",
+            "muscle_group": "Shoulders",
+            "equipment": "Barbell",
+            "sets": 3,
+            "reps": 8,
+            "weight": 95,
+            "image_filename": null
+        },
+        {
+            "exercise_id": 13,
+            "exercise_name": "Tricep Rope Pushdown",
+            "muscle_group": "Arms",
+            "equipment": "Cable",
+            "sets": 3,
+            "reps": 12,
+            "weight": 45,
+            "image_filename": null
+        }
+    ]
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Workout Routine Builder | Workout Routine Manager</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="brand">
+                FitTrack PHP
+                <span>Exercise &amp; Workout Routine Manager</span>
+            </a>
+            <nav class="main-nav">
+                <a href="index.html">Exercise Catalog</a>
+                <!-- PHP TODO: Dynamically show count from $_SESSION['routine'], and toggle "+ Add Exercise" / "Logout" based on $_SESSION['username'] -->
+                <a href="routine_builder.html" class="active">Active Routine (3)</a>
+                <a href="saved_routine.html">Saved Routines</a>
+                <a href="exercise_form.html">+ Add Exercise</a>
+                <a href="login.html">Login / Register</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dev-banner">
+            <strong>Starter Session Routine Builder:</strong> This view represents the active workout routine stored in
+            <code>$_SESSION['routine']</code> (modeled after our Shopping Cart architecture in the book apps).
+            Both guests and logged-in users can edit sets/reps/weight, remove exercises, and export the finalized routine
+            to a <code>.json</code> file inside <code>/routines/</code>.
+        </div>
+
+        <div class="page-header">
+            <div>
+                <h1>Active Workout Routine Builder</h1>
+                <p class="subtitle">Review your session exercises, adjust sets/reps/weight, and save as a JSON routine.</p>
+            </div>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                <a href="index.html" class="btn btn-secondary">+ Add More Exercises</a>
+                <form action="index.php" method="post" style="display:inline;">
+                    <input type="hidden" name="action" value="clear_routine">
+                    <button type="submit" class="btn btn-danger">Clear Draft</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Calculated Summary Cards (PHP TODO: Compute dynamically from $_SESSION['routine']) -->
+        <section class="metrics-grid">
+            <div class="metric-box">
+                <div class="metric-value">3</div>
+                <div class="metric-label">Draft Exercises</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-value">10</div>
+                <div class="metric-label">Total Sets</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-value">8,200 lbs</div>
+                <div class="metric-label">Estimated Volume</div>
+            </div>
+        </section>
+
+        <!-- Active Session Routine Table -->
+        <section class="card table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Preview (4-Person Team)</th>
+                        <th>Exercise</th>
+                        <th>Muscle Group</th>
+                        <th>Equipment</th>
+                        <th>Sets</th>
+                        <th>Reps</th>
+                        <th>Weight (lbs)</th>
+                        <th>Volume</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Item 1 -->
+                    <tr>
+                        <td>
+                            <!-- PHP TODO (4-Person Team): When image_filename is set (e.g., exercise_1.jpg), render 150px thumbnail from /images/thumbnails/ linking to /images/originals/ -->
+                            <a href="images/originals/exercise_1.jpg" target="_blank" class="thumb-placeholder" title="Click to view full-size original (exercise_1.jpg)">
+                                View Full<br>exercise_1.jpg
+                            </a>
+                        </td>
+                        <td><strong>Barbell Bench Press</strong></td>
+                        <td><span class="badge badge-group">Chest</span></td>
+                        <td>Barbell</td>
+                        <td colspan="3">
+                            <!-- PHP TODO: Update sets, reps, weight for exercise_id=1 in $_SESSION['routine'] -->
+                            <form action="index.php" method="post" style="display:flex; gap:0.4rem; align-items:center;">
+                                <input type="hidden" name="action" value="update_routine_item">
+                                <input type="hidden" name="exercise_id" value="1">
+                                <input type="number" name="sets" value="4" min="1" max="20" class="table-num-input" title="Sets" required>
+                                <span>&times;</span>
+                                <input type="number" name="reps" value="8" min="1" max="100" class="table-num-input" title="Reps" required>
+                                <span>@</span>
+                                <input type="number" name="weight" value="185" min="0" step="0.5" class="table-num-input" title="Weight" required>
+                                <button type="submit" class="btn btn-secondary btn-sm">Update</button>
+                            </form>
+                        </td>
+                        <td>5,920 lbs</td>
+                        <td>
+                            <form action="index.php" method="post" style="display:inline;">
+                                <input type="hidden" name="action" value="remove_routine_item">
+                                <input type="hidden" name="exercise_id" value="1">
+                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <!-- Item 2 -->
+                    <tr>
+                        <td>
+                            <span class="thumb-placeholder">No Image</span>
+                        </td>
+                        <td><strong>Pull-Ups</strong></td>
+                        <td><span class="badge badge-group">Back</span></td>
+                        <td>Bodyweight</td>
+                        <td colspan="3">
+                            <form action="index.php" method="post" style="display:flex; gap:0.4rem; align-items:center;">
+                                <input type="hidden" name="action" value="update_routine_item">
+                                <input type="hidden" name="exercise_id" value="5">
+                                <input type="number" name="sets" value="3" min="1" max="20" class="table-num-input" title="Sets" required>
+                                <span>&times;</span>
+                                <input type="number" name="reps" value="10" min="1" max="100" class="table-num-input" title="Reps" required>
+                                <span>@</span>
+                                <input type="number" name="weight" value="0" min="0" step="0.5" class="table-num-input" title="Weight" required>
+                                <button type="submit" class="btn btn-secondary btn-sm">Update</button>
+                            </form>
+                        </td>
+                        <td>0 lbs (BW)</td>
+                        <td>
+                            <form action="index.php" method="post" style="display:inline;">
+                                <input type="hidden" name="action" value="remove_routine_item">
+                                <input type="hidden" name="exercise_id" value="5">
+                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <!-- Item 3 -->
+                    <tr>
+                        <td>
+                            <span class="thumb-placeholder">No Image</span>
+                        </td>
+                        <td><strong>Overhead Barbell Press</strong></td>
+                        <td><span class="badge badge-group">Shoulders</span></td>
+                        <td>Barbell</td>
+                        <td colspan="3">
+                            <form action="index.php" method="post" style="display:flex; gap:0.4rem; align-items:center;">
+                                <input type="hidden" name="action" value="update_routine_item">
+                                <input type="hidden" name="exercise_id" value="10">
+                                <input type="number" name="sets" value="3" min="1" max="20" class="table-num-input" title="Sets" required>
+                                <span>&times;</span>
+                                <input type="number" name="reps" value="8" min="1" max="100" class="table-num-input" title="Reps" required>
+                                <span>@</span>
+                                <input type="number" name="weight" value="95" min="0" step="0.5" class="table-num-input" title="Weight" required>
+                                <button type="submit" class="btn btn-secondary btn-sm">Update</button>
+                            </form>
+                        </td>
+                        <td>2,280 lbs</td>
+                        <td>
+                            <form action="index.php" method="post" style="display:inline;">
+                                <input type="hidden" name="action" value="remove_routine_item">
+                                <input type="hidden" name="exercise_id" value="10">
+                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Finalize & Save Routine to JSON -->
+        <section class="card" style="max-width: 640px;">
+            <h2 style="color: var(--navy); margin-bottom: 0.35rem;">Save Routine to JSON</h2>
+            <p class="subtitle" style="margin-bottom: 1rem;">
+                Give your workout routine a title to export it to <code>/routines/</code>.
+            </p>
+
+            <!-- PHP TODO: Validate routine_title via regex, stamp created_at with DateTime, encode with json_encode(..., JSON_PRETTY_PRINT), save with file_put_contents(), and clear $_SESSION['routine'] -->
+            <form action="index.php" method="post">
+                <input type="hidden" name="action" value="save_routine">
+
+                <div class="form-group">
+                    <label for="routine_title">Routine Title</label>
+                    <input type="text" id="routine_title" name="routine_title" class="form-control"
+                           placeholder="e.g., Upper Body Strength A" maxlength="80" required>
+                    <span class="help-text">
+                        Letters, numbers, spaces, and hyphens only. Saved as a sanitized <code>.json</code> file.
+                    </span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Routine (.json)</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        PHP &amp; MySQL Final Project &bull; Starter Front-End Template
+    </footer>
+</body>
+</html>

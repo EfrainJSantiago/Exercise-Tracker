@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Workout Routine | Workout Routine Manager</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="brand">
+                FitTrack PHP
+                <span>Exercise &amp; Workout Routine Manager</span>
+            </a>
+            <nav class="main-nav">
+                <!-- PHP TODO: Dynamically show count from $_SESSION['routine'], and toggle "+ Add Exercise" / "Logout" based on $_SESSION['username'] -->
+                <a href="index.html">Exercise Catalog</a>
+                <a href="routine_builder.html">Active Routine (3)</a>
+                <a href="saved_routine.html" class="active">Saved Routines</a>
+                <a href="exercise_form.html">+ Add Exercise</a>
+                <a href="login.html">Login / Register</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dev-banner">
+            <strong>Starter Saved Routine Viewer:</strong> Three sample <code>.json</code> files are included in
+            <code>/routines/</code>. Replace the hardcoded routine list and table rows below by scanning
+            <code>/routines/</code> with <code>scandir()</code> and decoding the selected <code>.json</code>
+            file with <code>json_decode(..., true)</code>. All saved routines in <code>/routines/</code> act as a
+            shared public library viewable by any visitor.
+        </div>
+
+        <div class="page-header">
+            <div>
+                <h1>Saved Workout Routines</h1>
+                <p class="subtitle">Select a JSON routine file to view exercises, sets, reps, weight, and volume metrics.</p>
+            </div>
+        </div>
+
+        <!-- Routine File Selector (PHP TODO: Populate dynamically from /routines/*.json via scandir()) -->
+        <section class="card">
+            <form action="saved_routine.html" method="get" style="display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: end;">
+                <div style="flex: 1; min-width: 240px;">
+                    <label for="routine_file" style="display:block; font-weight:600; font-size:0.9rem; margin-bottom:0.35rem; color:var(--navy);">
+                        Select Saved Routine (.json)
+                    </label>
+                    <select id="routine_file" name="file" class="form-control">
+                        <option value="upper_body_strength_a.json" selected>upper_body_strength_a.json (Upper Body Strength A)</option>
+                        <option value="lower_body_power.json">lower_body_power.json (Lower Body Power)</option>
+                        <option value="full_body_beginner.json">full_body_beginner.json (Full Body Beginner)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Load Routine</button>
+            </form>
+        </section>
+
+        <!-- Routine Header & Summary Metrics -->
+        <div class="page-header" style="margin-top: 1.5rem;">
+            <div>
+                <h2 style="color: var(--navy);">Upper Body Strength A</h2>
+                <p class="subtitle">Created: <strong>2026-11-15 14:30:00</strong> &bull; File: <code>routines/upper_body_strength_a.json</code></p>
+            </div>
+        </div>
+
+        <!-- Calculated Summary Cards (PHP TODO: Compute dynamically using PHP array/math functions) -->
+        <section class="metrics-grid">
+            <div class="metric-box">
+                <div class="metric-value">4</div>
+                <div class="metric-label">Total Exercises</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-value">13</div>
+                <div class="metric-label">Total Sets</div>
+            </div>
+            <div class="metric-box">
+                <div class="metric-value">9,820 lbs</div>
+                <div class="metric-label">Total Volume Load</div>
+            </div>
+        </section>
+
+        <!-- Routine Exercises Table -->
+        <section class="card table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <!-- 4-Person Team Column: Thumbnail linking to full-size original image -->
+                        <th>Preview (4-Person Team)</th>
+                        <th>Exercise</th>
+                        <th>Muscle Group</th>
+                        <th>Equipment</th>
+                        <th>Sets</th>
+                        <th>Reps</th>
+                        <th>Weight</th>
+                        <th>Exercise Volume</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <!-- PHP TODO (4-Person Team): If image_filename is set (e.g., exercise_1.jpg), render 150px thumbnail from /images/thumbnails/ linking to /images/originals/{filename} -->
+                            <a href="images/originals/exercise_1.jpg" target="_blank" class="thumb-placeholder" title="Click to view full-size original (exercise_1.jpg)">
+                                View Full<br>exercise_1.jpg
+                            </a>
+                        </td>
+                        <td><strong>Barbell Bench Press</strong></td>
+                        <td><span class="badge badge-group">Chest</span></td>
+                        <td>Barbell</td>
+                        <td>4</td>
+                        <td>8</td>
+                        <td>185 lbs</td>
+                        <td>5,920 lbs</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="thumb-placeholder">No Image</span>
+                        </td>
+                        <td><strong>Pull-Ups</strong></td>
+                        <td><span class="badge badge-group">Back</span></td>
+                        <td>Bodyweight</td>
+                        <td>3</td>
+                        <td>10</td>
+                        <td>0 lbs (BW)</td>
+                        <td>0 lbs</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="thumb-placeholder">No Image</span>
+                        </td>
+                        <td><strong>Overhead Barbell Press</strong></td>
+                        <td><span class="badge badge-group">Shoulders</span></td>
+                        <td>Barbell</td>
+                        <td>3</td>
+                        <td>8</td>
+                        <td>95 lbs</td>
+                        <td>2,280 lbs</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="thumb-placeholder">No Image</span>
+                        </td>
+                        <td><strong>Tricep Rope Pushdown</strong></td>
+                        <td><span class="badge badge-group">Arms</span></td>
+                        <td>Cable</td>
+                        <td>3</td>
+                        <td>12</td>
+                        <td>45 lbs</td>
+                        <td>1,620 lbs</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        PHP &amp; MySQL Capstone Project &bull; Starter Front-End Template
+    </footer>
+</body>
+</html>

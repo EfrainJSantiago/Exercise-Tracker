@@ -1,0 +1,447 @@
+/* ============================================================================
+   Starter Stylesheet: Exercise & Workout Routine Manager
+   Course: PHP & MySQL Web Development (Murach's PHP and MySQL)
+   Note: Students may customize or expand this stylesheet as needed.
+   ============================================================================ */
+
+:root {
+    --navy: #1b365d;
+    --slate: #2c5282;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --bg: #f1f5f9;
+    --surface: #ffffff;
+    --border: #cbd5e1;
+    --text: #1e293b;
+    --muted: #64748b;
+    --success-bg: #dcfce7;
+    --success-text: #166534;
+    --warn-bg: #fef3c7;
+    --warn-text: #92400e;
+    --danger-bg: #fee2e2;
+    --danger-text: #991b1b;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+}
+
+/* Header & Navigation */
+.site-header {
+    background-color: var(--navy);
+    color: #ffffff;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
+}
+
+.header-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: 0.2px;
+}
+
+.brand span {
+    color: #93c5fd;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: block;
+}
+
+.main-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.main-nav a {
+    color: #e2e8f0;
+    text-decoration: none;
+    padding: 0.45rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: background-color 0.15s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    background-color: rgba(255, 255, 255, 0.16);
+    color: #ffffff;
+}
+
+/* Layout Container */
+.container {
+    max-width: 1140px;
+    margin: 1.75rem auto;
+    padding: 0 1.25rem;
+}
+
+.page-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.page-header h1 {
+    font-size: 1.6rem;
+    color: var(--navy);
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+/* Cards & Panels */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+.dev-banner {
+    background-color: #eff6ff;
+    border-left: 4px solid var(--accent);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+    color: #1e3a8a;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 0.95rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-secondary {
+    background-color: #e2e8f0;
+    color: var(--text);
+}
+
+.btn-secondary:hover {
+    background-color: #cbd5e1;
+}
+
+.btn-danger {
+    background-color: var(--danger-bg);
+    color: var(--danger-text);
+    border-color: #fecaca;
+}
+
+.btn-danger:hover {
+    background-color: #fecaca;
+}
+
+.btn-sm {
+    padding: 0.32rem 0.65rem;
+    font-size: 0.82rem;
+}
+
+/* Filter Bar */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.filter-pill {
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.86rem;
+    font-weight: 500;
+}
+
+.filter-pill.active,
+.filter-pill:hover {
+    background: var(--navy);
+    color: #ffffff;
+    border-color: var(--navy);
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.badge-group {
+    background-color: #e0e7ff;
+    color: #3730a3;
+}
+
+.badge-beginner {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+}
+
+.badge-intermediate {
+    background-color: var(--warn-bg);
+    color: var(--warn-text);
+}
+
+.badge-advanced {
+    background-color: var(--danger-bg);
+    color: var(--danger-text);
+}
+
+/* Exercise Grid */
+.exercise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 1.15rem;
+}
+
+.exercise-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.85rem;
+}
+
+.exercise-card h3 {
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 0.35rem;
+}
+
+.meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    font-size: 0.84rem;
+    color: var(--muted);
+}
+
+.instructions-text {
+    font-size: 0.9rem;
+    color: #334155;
+}
+
+.card-actions {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.routine-quick-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+}
+
+.routine-quick-form input[type="number"],
+.table-num-input {
+    width: 68px;
+    padding: 0.32rem 0.4rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.84rem;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 0.45rem;
+}
+
+/* Forms */
+.two-col-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+    color: var(--navy);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 0.2rem;
+}
+
+.radio-group label {
+    font-weight: 400;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    cursor: pointer;
+}
+
+.help-text {
+    display: block;
+    margin-top: 0.35rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.45;
+}
+
+/* Tables & Routine Summary */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.metric-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.metric-value {
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.metric-label {
+    font-size: 0.84rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+}
+
+th, td {
+    padding: 0.75rem 0.85rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background-color: #f8fafc;
+    color: var(--navy);
+    font-weight: 700;
+}
+
+.thumb-placeholder {
+    width: 82px;
+    height: 64px;
+    border-radius: 6px;
+    border: 1px dashed var(--border);
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-align: center;
+    text-decoration: none;
+    padding: 4px;
+    line-height: 1.25;
+}
+
+.thumb-placeholder:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.site-footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2.5rem;
+}
